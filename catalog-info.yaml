@@ -1,0 +1,48 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gkute-poi-map-app-dev
+  annotations:
+    argocd/app-name: gkute-poi-map-app-dev
+    backstage.io/kubernetes-id: gkute-poi-map-app
+    backstage.io/kubernetes-namespace: gkute
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-deploy/gkute-frontend
+    janus-idp.io/tekton-enabled: 'true'
+  tags:
+    - typescript
+    - angular
+    - workshop
+  links:
+    - url: https://console-openshift-console.apps.a1jxqhzp.eastus2.aroapp.io/dev-pipelines/ns/gkute/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.a1jxqhzp.eastus2.aroapp.io/k8s/ns/gkute/deployments/gkute-poi-map-app
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.a1jxqhzp.eastus2.aroapp.io/#https://github.com/rhdh-deploy/gkute-frontend?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: http://gkute-poi-map-app-gkute.apps.a1jxqhzp.eastus2.aroapp.io
+      title: Map
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:default/gkute"
+  system: workshop-system-gkute
+  consumesApis:
+    - gateway-api-gkute
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-gkute
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: "user:default/gkute"
